@@ -7,16 +7,62 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalculatorComponent implements OnInit {
 
-  firstNumber: number;
-  secondNumber: number;
+  expression = '';
+  result = '';
+  error = '';
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  appendNumber(digit: number) {
+  appendCharacter(char: string) {
+    if (this.error) {
+      this.error = '';
+    }
+    if (this.result && this.isNumber(char)) {
+      this.expression = '';
+      this.result = '';
+      this.expression = this.expression + char;
+    } else if (this.result && !this.isNumber(char)) {
+      this.expression = this.result;
+      this.result = '';
+      this.expression = this.expression + char;
+    } else if (!this.expression && !this.isNumber(char) && char !== '(' && char !== ')') {
+      this.expression = '0' + this.expression + char;
+    } else {
+      this.expression = this.expression + char;
+    }
 
+  }
+
+  clearAll() {
+    this.expression = '';
+    this.result = '';
+    this.error = '';
+  }
+
+  clearEntry() {
+    if (this.result) {
+      this.clearAll();
+    } else {
+      this.expression = this.expression.slice(0, -1);
+    }
+  }
+
+  equals() {
+    try {
+      // tslint:disable-next-line
+      this.result = eval(this.expression);
+      this.expression = this.expression + '=';
+    } catch (e) {
+      this.error = e.toString();
+      // this.result = 'Error';
+    }
+  }
+
+  private isNumber(char: string) {
+    return !isNaN(parseInt(char, 10));
   }
 
 }

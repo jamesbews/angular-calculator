@@ -1,79 +1,81 @@
-<div style="padding-top: 70px;">
+<div style="padding-top: 40px;">
   <div class="card calculator">
-    <input class="screen" type="text" value="69" disabled/>
+    <p *ngIf="error" class="expression-display error">{{error}}</p>
+    <p *ngIf="expression && !error" class="expression-display">{{expression}}</p>
+    <input class="screen" type="text" value="{{result ? result : expression}}" disabled/>
     <div class="container">
       <div class="row row-space">
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary calculator-button">(</button>
+          <button type="button" class="btn btn-secondary calculator-button" (click)="appendCharacter('(')">(</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">)</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter(')')">)</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-warning">CE</button>
+          <button type="button" class="btn btn-warning" (click)="clearEntry()">CE</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-danger">C</button>
-        </div>
-      </div>
-
-      <div class="row row-space">
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">7</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">8</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">9</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-info">&divide;</button>
+          <button type="button" class="btn btn-danger" (click)="clearAll()">C</button>
         </div>
       </div>
 
       <div class="row row-space">
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">4</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('7')">7</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">5</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('8')">8</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">6</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('9')">9</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-info">&times;</button>
-        </div>
-      </div>
-
-      <div class="row row-space">
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">1</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">2</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-secondary">3</button>
-        </div>
-        <div class="col text-center">
-          <button type="button" class="btn btn-info">-</button>
+          <button type="button" class="btn btn-info" (click)="appendCharacter('/')">&divide;</button>
         </div>
       </div>
 
       <div class="row row-space">
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">0</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('4')">4</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-secondary">.</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('5')">5</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-primary">=</button>
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('6')">6</button>
         </div>
         <div class="col text-center">
-          <button type="button" class="btn btn-info">+</button>
+          <button type="button" class="btn btn-info" (click)="appendCharacter('*')">&times;</button>
+        </div>
+      </div>
+
+      <div class="row row-space">
+        <div class="col text-center">
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('1')">1</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('2')">2</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('3')">3</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-info" (click)="appendCharacter('-')">-</button>
+        </div>
+      </div>
+
+      <div class="row row-space">
+        <div class="col text-center">
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('0')">0</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-secondary" (click)="appendCharacter('.')">.</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-primary" (click)="equals()">=</button>
+        </div>
+        <div class="col text-center">
+          <button type="button" class="btn btn-info" (click)="appendCharacter('+')">+</button>
         </div>
       </div>
     </div>
