@@ -54,15 +54,16 @@ export class CalculatorComponent implements OnInit {
     try {
       // tslint:disable-next-line
       this.result = eval(this.expression);
+      if (!this.result) {
+        this.result = '0';
+      }
       this.expression = this.expression + '=';
     } catch (e) {
       this.error = e.toString();
-      // this.result = 'Error';
     }
   }
 
   private isNumber(char: string) {
     return !isNaN(parseInt(char, 10));
   }
-
 }
