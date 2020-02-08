@@ -1,7 +1,8 @@
-<div style="padding-top: 40px;">
+<div style="padding: 40px 0;">
   <div class="card calculator">
     <p *ngIf="error" class="expression-display error">{{error}}</p>
     <p *ngIf="expression && !error" class="expression-display">{{expression}}</p>
+    <p *ngIf="!expression && !error" style="color: white;">.</p>
     <input class="screen" type="text" value="{{result ? result : expression}}" disabled/>
     <div class="container">
       <div class="row row-space">
